@@ -1,5 +1,6 @@
 'use strict'
 
+const Util = require('util')
 const _ = require('lodash')
 const Promise = require('bluebird')
 const utils = require('../../utils')
@@ -93,9 +94,10 @@ function validateAsObject (acc) {
   return !_.isPlainObject(acc.value)
     ? Promise.reject(
       new Error(
-        `"${entity.id}" received acc.value = ${JSON.stringify(
-          acc.value
-        ).substr(0, 15)} of type ${utils.typeOf(
+        `"${entity.id}" received acc.value = ${Util.inspect(acc.value).substr(
+          0,
+          15
+        )} of type ${utils.typeOf(
           acc.value
         )} this entity only process plain Objects. More info https://github.com/ViacomInc/data-point#collection-entity`
       )
@@ -132,11 +134,6 @@ function resolveCompose (accumulator, composeModifiers, resolveTransform) {
 
 function resolve (acc, resolveTransform) {
   const entity = acc.reducer.spec
-
-  // // if there is nothing to do, lets just move on
-  // if (typeof acc.value === 'undefined' || acc.value === null) {
-  //   return Promise.resolve(acc)
-  // }
 
   return resolveTransform(acc, entity.value)
     .then(itemContext => validateAsObject(itemContext))

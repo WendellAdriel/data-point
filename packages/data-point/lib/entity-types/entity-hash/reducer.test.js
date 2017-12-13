@@ -33,13 +33,10 @@ beforeAll(() => {
 describe('entity.hash.resolve', () => {
   test('entity.hash - only process Plain Objects', () => {
     return transform('hash:arraysNotAllowed', testData)
-      .catch(result => {
-        return result
-      })
+      .catch(e => e)
       .then(result => {
         expect(result).toBeInstanceOf(Error)
-        expect(result.message).toContain('[1,2,3] of type array')
-        expect(result.message).toContain('More info https://')
+        expect(result).toMatchSnapshot()
       })
   })
 
@@ -47,6 +44,7 @@ describe('entity.hash.resolve', () => {
     return transform('hash:noValue', null)
       .catch(err => err)
       .then(result => {
+        expect(result).toBeInstanceOf(Error)
         expect(result).toMatchSnapshot()
       })
   })
