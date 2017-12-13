@@ -8,6 +8,7 @@ const entities = require('../../test/definitions/entities')
 
 const transform = require('./transform')
 const TestData = require('../../test/data.json')
+const nock = require('nock')
 
 let dataPoint
 
@@ -85,5 +86,36 @@ describe('options argument', () => {
     return transform(dataPoint, reducer, {}, options).then(res => {
       expect(res.value).toEqual('Hello World')
     })
+  })
+})
+
+describe('handle undefined value', () => {
+  test('transform - should pass undefined', () => {
+    return transform(dataPoint, '$a.b.c').then(res => {
+      expect(res.value).toEqual(undefined)
+    })
+  })
+
+  test('transform - should pass undefined', () => {
+    return transform(dataPoint, 'hash:noValue')
+      .catch(e => e)
+      .then(res => {
+        expect(res).toBeInstanceOf(Error)
+      })
+  })
+
+  test('transform - request should execute as it does not depend on value passed', () => {
+    nock('http://remote.test')
+      .get('/source1')
+      .reply(200, {
+        ok: true
+      })
+    return transform(dataPoint, 'request:a1')
+      .catch(e => e)
+      .then(res => {
+        expect(res.value).toEqual({
+          ok: true
+        })
+      })
   })
 })

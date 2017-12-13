@@ -43,10 +43,12 @@ describe('entity.hash.resolve', () => {
       })
   })
 
-  test('entity.hash - do nothing if empty', () => {
-    return transform('hash:noValue', null).then(result => {
-      expect(result.value).toEqual(null)
-    })
+  test('entity.hash - throw error if value is not object', () => {
+    return transform('hash:noValue', null)
+      .catch(err => err)
+      .then(result => {
+        expect(result).toMatchSnapshot()
+      })
   })
 })
 

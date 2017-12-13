@@ -1,7 +1,8 @@
 const reducers = require('../utils/reducers')
 
 module.exports = {
-  'hash:noValue': {
+  'hash:noValue': {},
+  'hash:invalidValue': {
     value: (acc, next) => {
       return next(null, 'invalid')
     }

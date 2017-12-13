@@ -19,10 +19,10 @@ function resolve (manager, transformSource, value, options) {
   const contextOptions = getOptions(options)
 
   const context = AccumulatorFactory.create({
-    value: _.defaults(value, {}),
     locals: contextOptions.locals,
     trace: contextOptions.trace,
-    values
+    values,
+    value
   })
 
   const transform = TransformExpression.create(transformSource)

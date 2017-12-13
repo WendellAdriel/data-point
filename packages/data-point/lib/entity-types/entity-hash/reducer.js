@@ -97,7 +97,7 @@ function validateAsObject (acc) {
           acc.value
         ).substr(0, 15)} of type ${utils.typeOf(
           acc.value
-        )} this entity only process plain Objects. More info https://github.com/ViacomInc/data-point#hash-entity`
+        )} this entity only process plain Objects. More info https://github.com/ViacomInc/data-point#collection-entity`
       )
     )
     : acc
@@ -133,10 +133,10 @@ function resolveCompose (accumulator, composeModifiers, resolveTransform) {
 function resolve (acc, resolveTransform) {
   const entity = acc.reducer.spec
 
-  // if there is nothing to do, lets just move on
-  if (typeof acc.value === 'undefined' || acc.value === null) {
-    return Promise.resolve(acc)
-  }
+  // // if there is nothing to do, lets just move on
+  // if (typeof acc.value === 'undefined' || acc.value === null) {
+  //   return Promise.resolve(acc)
+  // }
 
   return resolveTransform(acc, entity.value)
     .then(itemContext => validateAsObject(itemContext))

@@ -1,6 +1,5 @@
 'use strict'
 
-const _ = require('lodash')
 const Promise = require('bluebird')
 const utils = require('../../utils')
 
@@ -95,17 +94,23 @@ function validateAsArray (acc) {
   return acc.value instanceof Array
     ? acc
     : Promise.reject(
-      new Error(`Entity ${entity.id}.value resolved to a non Array value`)
+      new Error(
+        `"${entity.id}" received acc.value = ${JSON.stringify(
+          acc.value
+        ).substr(0, 15)} of type ${utils.typeOf(
+          acc.value
+        )} this entity only process Array values. More info https://github.com/ViacomInc/data-point/tree/master/packages/data-point#collection-entity`
+      )
     )
 }
 
 function resolve (accumulator, resolveTransform) {
   const entity = accumulator.reducer.spec
 
-  // if there is nothing to do, lets just move on
-  if (_.isEmpty(accumulator.value)) {
-    return Promise.resolve(accumulator)
-  }
+  // // if there is nothing to do, lets just move on
+  // if (_.isEmpty(accumulator.value)) {
+  //   return Promise.resolve(accumulator)
+  // }
 
   return resolveTransform(accumulator, entity.value, resolveTransform)
     .then(acc => validateAsArray(acc))

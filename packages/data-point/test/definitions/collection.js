@@ -1,11 +1,7 @@
 const reducers = require('../utils/reducers')
 
 module.exports = {
-  'collection:noValue': {
-    value: (acc, next) => {
-      return next(null, 'invalid')
-    }
-  },
+  'collection:noValue': {},
   'collection:ObjectsNotAllowed': {
     value: '$a.b'
   },

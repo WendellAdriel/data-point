@@ -45,10 +45,12 @@ describe('CollectionReducer.resolve', () => {
       })
   })
 
-  test('entity.collection - do nothing if empty', () => {
-    return transform('collection:noValue', null).then(result => {
-      expect(result.value).toEqual(null)
-    })
+  test('entity.collection - throw error if value not array', () => {
+    return transform('collection:noValue', null)
+      .catch(err => err)
+      .then(result => {
+        expect(result).toMatchSnapshot()
+      })
   })
 })
 
