@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`entity.hash.resolve entity.hash - only process Plain Objects 1`] = `[Error: "hash:arraysNotAllowed" received acc.value = [ 1, 2, 3 ] of type array this entity only process plain Objects. More info https://github.com/ViacomInc/data-point#collection-entity]`;
+exports[`entity.hash.resolve entity.hash - only process Plain Objects 1`] = `[Error: "hash:arraysNotAllowed" received acc.value = [ 1, 2, 3 ] of type array this entity only process plain Objects. More info https://github.com/ViacomInc/data-point/tree/master/packages/data-point#hash-entity]`;
 
-exports[`entity.hash.resolve entity.hash - throw error if value is not object 1`] = `[Error: "hash:noValue" received acc.value = null of type null this entity only process plain Objects. More info https://github.com/ViacomInc/data-point#collection-entity]`;
+exports[`entity.hash.resolve entity.hash - throw error if value is not object 1`] = `[Error: "hash:noValue" received acc.value = null of type null this entity only process plain Objects. More info https://github.com/ViacomInc/data-point/tree/master/packages/data-point#hash-entity]`;

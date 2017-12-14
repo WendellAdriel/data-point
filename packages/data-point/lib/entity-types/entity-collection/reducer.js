@@ -96,12 +96,13 @@ function validateAsArray (acc) {
     ? acc
     : Promise.reject(
       new Error(
-        `"${entity.id}" received acc.value = ${Util.inspect(acc.value).substr(
-          0,
-          15
-        )} of type ${utils.typeOf(
-          acc.value
-        )} this entity only process Array values. More info https://github.com/ViacomInc/data-point/tree/master/packages/data-point#collection-entity`
+        Util.format(
+          `"%s" received acc.value = %s of type %s this entity only process Array values. More info %s`,
+          entity.id,
+          Util.inspect(acc.value).substr(0, 15),
+          utils.typeOf(acc.value),
+          'https://github.com/ViacomInc/data-point/tree/master/packages/data-point#collection-entity'
+        )
       )
     )
 }

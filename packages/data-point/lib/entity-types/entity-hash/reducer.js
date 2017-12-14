@@ -94,12 +94,13 @@ function validateAsObject (acc) {
   return !_.isPlainObject(acc.value)
     ? Promise.reject(
       new Error(
-        `"${entity.id}" received acc.value = ${Util.inspect(acc.value).substr(
-          0,
-          15
-        )} of type ${utils.typeOf(
-          acc.value
-        )} this entity only process plain Objects. More info https://github.com/ViacomInc/data-point#collection-entity`
+        Util.format(
+          `"%s" received acc.value = %s of type %s this entity only process plain Objects. More info %s`,
+          entity.id,
+          Util.inspect(acc.value).substr(0, 15),
+          utils.typeOf(acc.value),
+          'https://github.com/ViacomInc/data-point/tree/master/packages/data-point#hash-entity'
+        )
       )
     )
     : acc
